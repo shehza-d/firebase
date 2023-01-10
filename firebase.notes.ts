@@ -3,6 +3,7 @@ firebase ma react ky sath ya webpack compiled bundle JS se SDK chiye tw import c
 
 lakan plane html se CDN se ho jata hy
 
+file extenstion puri ho .js ya .mjs
 
 
 
