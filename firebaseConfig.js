@@ -2,7 +2,10 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
 // import { initializeApp } from "firebase/app";
 
-// import { getAuth } from "firebase/auth";
+import { getAuth } from "firebase/auth";
+// import { getAuth } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js'
+import { getFirestore } from "firebase/firestore";
+// import { getFirestore } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
 
 // Web app's Firebase configuration
 const firebaseConfig = {

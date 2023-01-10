@@ -1,7 +1,11 @@
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";//npm
+// import { getAuth } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js'//cdn
+// import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js'
+
+import {auth} from './firebaseConfig'
 
 // creating user
-const auth = getAuth();
+// const auth = getAuth();//ye nhi use hoga iski jaga import kar liya hy
 try {
   const userCredential = await createUserWithEmailAndPassword(
     auth,
