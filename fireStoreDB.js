@@ -1,12 +1,13 @@
 // Import the functions you need from the SDKs you need
 import {
   getFirestore,
-  collection,
+  collection,//get reference to a collection
   addDoc,
   getDocs,
-  doc,
+  doc,//get reference to a document
   onSnapshot,
   query,
+  where,
   serverTimestamp,
   orderBy,
   deleteDoc,
@@ -17,6 +18,89 @@ import {
 
 import { db } from "./path_to_firebaseConfig";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
+
+//Working code
+const colRef = collection(db, "collectionName");// collection ref
+
+// get collection data
+getDocs(colRef)//this is not real time 
+  .then((myDataSnapShot) => {
+    // console.log(myDataSnapShot.docs)
+    let myData = [];
+    myDataSnapShot.docs.forEach((doc) => {
+      myData.push({ ...doc.data(), id: doc.id });
+    });
+    console.log(myData);
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+//
+// get collection data Realtime
+await onSnapshot(collection(db, "collectionName"),(myDataSnapShot)=>{//this call back function is going to fire every time there is a change in collection and send us back the a new snapshot
+  //we can also pass in query reference here instead of collection reference to only bring queried items
+  let myData = [];
+    myDataSnapShot.docs.forEach((doc) => {
+      myData.push({ ...doc.data(), id: doc.id });
+    });
+    console.log(myData);
+})
+
+//
+//sending data 
+addDoc(collection(db, 'collectionName'), {
+  title: "addBookForm.title.value",
+  author: "addBookForm.author.value",
+})
+.then(() => {
+  // something
+  // addBookForm.reset()
+})
+//
+
+//deleteFunction
+await deleteDoc(doc(db, 'collectionName', "idOfDocument"))
+//
+
+//
+const q = query(colRef,where("author","==", "Shehzad"))
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Working code
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //get all data
 useEffect(() => {
