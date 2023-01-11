@@ -45,22 +45,19 @@ getDocs(colRef) //this is not real time
     console.log(err.message);
   });
 //
-//get one document
-getDoc;
-// fetching a single document (& realtime)
+//get/fetching one single document
 const docRef = doc(db, "books", "gGu4P9x0ZHK9SspA1d9j");
 // const docRef = doc(db, 'userUID', 'documentID=saving')//my
-
+//1 way
 getDoc(docRef) //not real time//not recommended
   .then((doc) => {
     console.log(doc.data(), doc.id);
   });
-
+//2 way
 onSnapshot(docRef, (doc) => {//recommended
   //RealTime //now we are subscribing to changes to a particular doc
   console.log(doc.data(), doc.id);
 });
-Footer;
 
 //
 // get all collection data Realtime
@@ -85,13 +82,24 @@ addDoc(collection(db, "collectionName"), {
 });
 //
 
+//updating
+  updateDoc(docRef, {//this will only update the title and leave rest as it is  
+    title: 'updated title'
+  })
+  .then(() => {
+    updateForm.reset()
+  })
+//
 //deleteFunction
 await deleteDoc(doc(db, "collectionName", "idOfDocument"));
 //
 
 //Working code
 
-//get all data
+
+
+
+//old
 useEffect(() => {
   // (async () => {
   //   const querySnapshot = await getDocs(collection(db, "posts"));
