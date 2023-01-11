@@ -1,10 +1,11 @@
 // Import the functions you need from the SDKs you need
 import {
   getFirestore,
-  collection,//get reference to a collection
+  collection, //get reference to a collection
   addDoc,
-  getDocs,
-  doc,//get reference to a document
+  getDocs, //get all docs
+  getDoc, //get one doc
+  doc, //get reference to a document
   onSnapshot,
   query,
   where,
@@ -20,10 +21,18 @@ import { db } from "./path_to_firebaseConfig";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 
 //Working code
-const colRef = collection(db, "collectionName");// collection ref
+const colRef = collection(db, "collectionName"); // collection ref
 
-// get collection data
-getDocs(colRef)//this is not real time 
+//
+const q = query(
+  colRef,
+  where("author", "==", "Shehzad"),
+  orderBy("userName", "desc")
+); //orderBy("createdAt")
+//
+
+// get all collection data
+getDocs(colRef) //this is not real time
   .then((myDataSnapShot) => {
     // console.log(myDataSnapShot.docs)
     let myData = [];
@@ -36,71 +45,51 @@ getDocs(colRef)//this is not real time
     console.log(err.message);
   });
 //
-// get collection data Realtime
-await onSnapshot(collection(db, "collectionName"),(myDataSnapShot)=>{//this call back function is going to fire every time there is a change in collection and send us back the a new snapshot
-  //we can also pass in query reference here instead of collection reference to only bring queried items
-  let myData = [];
-    myDataSnapShot.docs.forEach((doc) => {
-      myData.push({ ...doc.data(), id: doc.id });
-    });
-    console.log(myData);
-})
+//get one document
+getDoc;
+// fetching a single document (& realtime)
+const docRef = doc(db, "books", "gGu4P9x0ZHK9SspA1d9j");
+// const docRef = doc(db, 'userUID', 'documentID=saving')//my
+
+getDoc(docRef) //not real time//not recommended
+  .then((doc) => {
+    console.log(doc.data(), doc.id);
+  });
+
+onSnapshot(docRef, (doc) => {//recommended
+  //RealTime //now we are subscribing to changes to a particular doc
+  console.log(doc.data(), doc.id);
+});
+Footer;
 
 //
-//sending data 
-addDoc(collection(db, 'collectionName'), {
+// get all collection data Realtime
+await onSnapshot(collection(db, "collectionName"), (myDataSnapShot) => {
+  //this call back function is going to fire every time there is a change in collection and send us back the a new snapshot
+  //we can also pass in query reference here instead of collection reference to only bring queried items
+  let myData = [];
+  myDataSnapShot.docs.forEach((doc) => {
+    myData.push({ ...doc.data(), id: doc.id });
+  });
+  console.log(myData);
+});
+
+//
+//sending data
+addDoc(collection(db, "collectionName"), {
   title: "addBookForm.title.value",
   author: "addBookForm.author.value",
-})
-.then(() => {
+}).then(() => {
   // something
   // addBookForm.reset()
-})
+});
 //
 
 //deleteFunction
-await deleteDoc(doc(db, 'collectionName', "idOfDocument"))
+await deleteDoc(doc(db, "collectionName", "idOfDocument"));
 //
-
-//
-const q = query(colRef,where("author","==", "Shehzad"))
-//
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //Working code
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //get all data
 useEffect(() => {
