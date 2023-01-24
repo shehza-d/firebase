@@ -89,7 +89,17 @@ addDoc(collection(db, "collectionName"), {
   .then(() => {
     updateForm.reset()
   })
+   setDoc(doc(db, "collectionName", "DocumentID"), {
+      amount: 0,
+      category: "default",
+      createdOn: serverTimestamp(),
+    });
+
+
+
 //
+
+
 //deleteFunction
 await deleteDoc(doc(db, "collectionName", "idOfDocument"));
 //
