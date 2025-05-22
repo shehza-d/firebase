@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>db</h1>
+
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+      import {
+        doc,
+        setDoc,
+        getDocs,
+        collection,
+        getFirestore,
+      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"; //CDN
+
+      // Your web app's Firebase configuration
+      // const firebaseConfig = {
+      //   apiKey: "AIzaSyA6S61Oe3kCD8dDjumEqDDt6I8XI_h5IXs",
+      //   authDomain: "noor-b11.firebaseapp.com",
+      //   projectId: "noor-b11",
+      //   storageBucket: "noor-b11.appspot.com",
+      //   messagingSenderId: "680994194298",
+      //   appId: "1:680994194298:web:e9371803d2665e91428cc3",
+      // };
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBuNhxOBd2qDVnDzzcorGDnGU1dieshWkM",
+        authDomain: "quiz-app-cb036.firebaseapp.com",
+        projectId: "quiz-app-cb036",
+        storageBucket: "quiz-app-cb036.appspot.com",
+        messagingSenderId: "349327445024",
+        appId: "1:349327445024:web:255ebec1cd47f34754c045",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+
+      // Initialize Firebase Authentication and get a reference to the service
+      // export const auth = getAuth(app);
+
+      // Initialize Cloud Firestore and get a reference to the service
+      export const db = getFirestore(app);
+      console.log("🚀 ~ db:", db);
+
+      const querySnapshot = await getDocs(collection(db, "resultsddsds"));
+      querySnapshot.forEach((doc) => {
+        console.log(`${doc.id} => ${doc.data()}`);
+      });
+
+      // async function getAllSubcollectionsData(rootDocRef) {
+      //   try {
+      //     const collections = await rootDocRef.listCollections();
+      //     for (const collection of collections) {
+      //       console.log(`Collection ID: ${collection.id}`);
+      //       const snapshot = await collection.get();
+      //       snapshot.forEach((doc) => {
+      //         console.log(doc.id, "=>", doc.data());
+      //       });
+      //     }
+      //   } catch (error) {
+      //     console.error("Error getting collections: ", error);
+      //   }
+      // }
+
+      // // Example usage with a root document reference
+      // const rootDocRef = collection("users").doc("rootDoc");
+      // getAllSubcollectionsData(rootDocRef);
+      // console.log("myData :>> ", myData);
+    </script>
+  </body>
+</html>
